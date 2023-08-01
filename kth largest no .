@@ -1,0 +1,43 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+int findKthLargest1(vector<int> nums, int k) {
+    sort(nums.begin(),nums.end());
+    return nums[nums.size()-k];
+}
+int findKthLargest2(vector<int> nums, int k) {
+    for(int i=0;i<k;i++){
+        for(int j=1;j<nums.size()-i;j++){
+            if(nums[j-1]>nums[j]){
+                int temp=nums[j-1];
+                nums[j-1]=nums[j];
+                nums[j]=temp;
+            }
+        }
+    }
+    return nums[nums.size()-k];
+}    
+
+int main()
+{
+    int n,k;
+    cout<<"Enter the value of n and k respectively : ";
+    cin>>n>>k;
+    if(n<k ||k<=0){
+        cout<<"value of k is invalid";
+    }
+    vector <int> v(n);
+    for(int i=0;i<n;i++){
+        cin>>v[i];
+    }
+    cout<<findKthLargest2(v,k)<<" "<<findKthLargest1(v,k);
+    return 0;
+}
