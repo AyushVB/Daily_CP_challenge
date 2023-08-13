@@ -1,0 +1,87 @@
+// using stack
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack <string> sa;
+        string d="";
+        for(int i=0;i<s.size();i++){
+            if(s[i]!=' '){
+                string temp="";
+                while(s[i]!=' ' && i<s.size()){
+                    temp+=s[i];
+                    i++;
+                }
+                sa.push(temp);
+            }
+        }
+        string temp="";
+        while(!sa.empty()){
+            temp+=sa.top()+" ";
+            sa.pop();
+        }
+        
+        temp.pop_back();
+        return temp;
+    }
+};
+// using vector
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector <string> sa;
+        string d="";
+        for(int i=0;i<s.size();i++){
+            if(s[i]!=' '){
+                string temp="";
+                while(s[i]!=' ' && i<s.size()){
+                    temp+=s[i];
+                    i++;
+                }
+                sa.push_back(temp);
+            }
+        }
+        string temp="";
+        for(auto it=sa.rbegin();it!=sa.rend();it++){
+            temp+=*it+" ";
+        }
+        
+        temp.pop_back();
+        return temp;
+    }
+};
+// using iStringStream
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+ string reverseWords(const  string &s) {
+    istringstream iss(s);
+     vector< string> words;
+    
+    // Split the input string into words
+     string word;
+    while (iss >> word) {
+        words.push_back(word);
+    }
+    
+    // Reverse the order of words
+     string reversed;
+    for (auto it = words.rbegin(); it != words.rend(); ++it) {
+        reversed += *it;
+        if (it + 1 != words.rend()) {
+            reversed += " ";
+        }
+    }
+    
+    return reversed;
+}
+
+int main() {
+     string input = "     Hello World C++     ";
+     string reversed = reverseWords(input);
+     cout << "Original: " << input <<  endl;
+     cout << "Reversed: " << reversed <<  endl;
+    
+    return 0;
+}
